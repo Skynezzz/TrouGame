@@ -160,14 +160,17 @@ public class EnemyController : MonoBehaviour
         isDead = true;
 
         agent.ResetPath();
-        agent.enabled        = false;
+        agent.enabled            = false;
         animator.applyRootMotion = false;
-
         animator.SetTrigger(DeathHash);
 
-        Collider col = GetComponent<Collider>();
-        if (col != null) col.enabled = false;
-    }
+        // ✅ On garde le collider actif pour le loot
+        // On change juste le layer pour ignorer les collisions de combat
+        gameObject.layer = LayerMask.NameToLayer("DeadEnemy");
+
+        EnemyLoot loot = GetComponent<EnemyLoot>();
+        if (loot != null) loot.OnEnemyDied();
+    }   
 
     // Appelé via Animation Event à la fin du clip de mort
     public void OnDeathAnimationEnd()
@@ -213,7 +216,7 @@ public class EnemyController : MonoBehaviour
         if (UnityEngine.InputSystem.Keyboard.current.pKey.wasPressedThisFrame)
         {
             TakeDamage(20f);
-            Debug.Log($"[DEBUG] Dégâts infligés — Vie restante : {currentHealth}/{maxHealth}");
+            //Debug.Log($"[DEBUG] Dégâts infligés — Vie restante : {currentHealth}/{maxHealth}");
         }
     }
 
