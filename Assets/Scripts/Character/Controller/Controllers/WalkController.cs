@@ -55,7 +55,7 @@ namespace TrouGame.Character.Controller.Controllers
                 if (value != isGrounded)
                 {
                     _isGrounded = value;
-                    if (isGrounded)
+                    if (_isGrounded)
                     {
                         if (voidJumpTimerCoroutine != null)
                             StopCoroutine(voidJumpTimerCoroutine);
@@ -89,7 +89,10 @@ namespace TrouGame.Character.Controller.Controllers
         {
             if (canJump)
             {
+                if (velocity.y < 0)
+                    velocity = new(velocity.x, 0f, velocity.z);
                 rigidbody.AddForce(Vector3.up * jumpForce * 10f);
+                character.transform.position += Vector3.up * 0.1f;
                 canJump = false;
             }
         }
@@ -130,7 +133,7 @@ namespace TrouGame.Character.Controller.Controllers
             Vector3 initialVelocity = velocity;
 
             // Grounded Check //
-            if (Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo, Quaternion.identity, 1.1f))
+            if (Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo, Quaternion.identity, 1.01f))
             {
                 if (initialVelocity.y <= 0f || (initialVelocity.y > 0f && hitInfo.distance <= 1f))
                 {
@@ -151,6 +154,7 @@ namespace TrouGame.Character.Controller.Controllers
                 isGrounded = false;
             }
 
+            // Gravity //
             if (!isGrounded)
                 initialVelocity += Vector3.down * garvityForce * Time.fixedDeltaTime;
 
