@@ -13,10 +13,10 @@ namespace TrouGame.Character.Spell.Spells
     {
         [Header("Graplin")]
         [SerializeField] GameObject grapIndicatorPrefab;
-        [SerializeField] float maxRange = 20f;
-        [SerializeField] float minRange = 3f;
-        [SerializeField] float speed = 100f;
-        [SerializeField] float maxGrapPullTime = 5f;
+        float maxRange => GraplinMetrics.Current.maxRange;
+        float minRange => GraplinMetrics.Current.minRange;
+        float speed => GraplinMetrics.Current.speed;
+        float maxGrapPullTime => GraplinMetrics.Current.maxGrapPullTime;
 
         Transform lookAt => Anchor.TRANSFORMS["LookAt"];
         Coroutine grapPullCoroutine;

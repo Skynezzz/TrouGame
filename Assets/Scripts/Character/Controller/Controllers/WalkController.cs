@@ -10,20 +10,20 @@ namespace TrouGame.Character.Controller.Controllers
     public class WalkController : ControllerBase
     {
         [SerializeField] private Transform head;
-        [SerializeField, Range(0, 1)] private float viewSensitivity = 0.1f;
-        [SerializeField] private float maxSpeed = 20f;
-        [SerializeField] private float runMaxSpeed = 20f;
-        [SerializeField] private float walkForce = 20f;
-        [SerializeField] private float runForce = 20f;
-        [SerializeField] private float breakStrenght = 0.3f;
-        [SerializeField] private float airConstraint = 0.3f;
-        [SerializeField] private float garvityForce = 10f;
-        [SerializeField] private float jumpForce = 50f;
-        [SerializeField] private float voidJumpTime = 0.2f;
-        [SerializeField] private float strafStrenght = 1f;
-        [Header("Step")]
-        [SerializeField] private float stepAssist;
-        [SerializeField] private float bigStepAccelerationMult;
+        private float viewSensitivity => WalkControllerMetrics.Current.viewSensitivity;
+        private float maxSpeed => WalkControllerMetrics.Current.maxSpeed;
+        private float runMaxSpeed => WalkControllerMetrics.Current.runMaxSpeed;
+        private float walkForce => WalkControllerMetrics.Current.walkForce;
+        private float runForce => WalkControllerMetrics.Current.runForce;
+        private float breakStrenght => WalkControllerMetrics.Current.breakStrenght;
+        private float airConstraint => WalkControllerMetrics.Current.airConstraint;
+        private float garvityForce => WalkControllerMetrics.Current.garvityForce;
+        private float jumpForce => WalkControllerMetrics.Current.jumpForce;
+        private float voidJumpTime => WalkControllerMetrics.Current.voidJumpTime;
+        private float strafStrenght => WalkControllerMetrics.Current.strafStrenght;
+
+        private float stepAssist => WalkControllerMetrics.Current.stepAssist;
+        private float bigStepAccelerationMult => WalkControllerMetrics.Current.bigStepAccelerationMult;
 
         private Transform character;
         private Transform skin;
