@@ -135,7 +135,7 @@ namespace TrouGame.Character.Controller.Controllers
             // Grounded Check //
             if (Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo, Quaternion.identity, 1.01f))
             {
-                if (initialVelocity.y <= 0f || (initialVelocity.y > 0f && hitInfo.distance <= 1f))
+                if (initialVelocity.y <= 0f || (initialVelocity.y > 0f && hitInfo.distance < 1f))
                 {
                     isGrounded = true;
                     character.position += Vector3.up * (1 - hitInfo.distance);

@@ -9,6 +9,7 @@ namespace TrouGame.Character.Controller.Controllers.CameraControllers
 {
     public class FirstAndThirdPersonCameraController : MonoBehaviour
     {
+        [SerializeField] private float maxAngle;
         [SerializeField] private CinemachineCamera firstPerson;
         [SerializeField] private CinemachineCamera thirdPerson;
         [SerializeField] private List<GameObject> HideInFirstPerson;
@@ -28,7 +29,7 @@ namespace TrouGame.Character.Controller.Controllers.CameraControllers
         public void Rotate(Vector2 value)
         {
             transform.rotation = Quaternion.Euler(
-                Clamp(transform.rotation.eulerAngles.x - value.y, -50f, 50f, 360f - 50f),
+                Clamp(transform.rotation.eulerAngles.x - value.y, -maxAngle, maxAngle, 360f - maxAngle),
                 transform.rotation.eulerAngles.y + value.x,
                 0);
 

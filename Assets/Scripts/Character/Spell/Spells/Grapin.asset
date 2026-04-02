@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68870362a86fc3f4f8f957de150bf997, type: 3}
+  m_Name: Grapin
+  m_EditorClassIdentifier: Assembly-CSharp::TrouGame.Character.Spell.Spells.Grapin
+  name: Grapin
+  grapIndicatorPrefab: {fileID: 4665076585319047791, guid: 8ae984eaf3ebf5f4a8ce808e03dd6736, type: 3}
+  maxRange: 20
+  minRange: 1.5
+  speed: 10
+  maxGrapPullTime: 1
