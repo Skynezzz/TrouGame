@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.helteix.singletons": "1.3.7",
+    "com.helteix.singletons": "1.3.8",
     "com.kyrylokuzyk.primetween": "file:../Assets/Plugins/PrimeTween/internal/com.kyrylokuzyk.primetween.tgz",
     "com.unity.ai.navigation": "2.0.10",
     "com.unity.cinemachine": "3.1.6",
