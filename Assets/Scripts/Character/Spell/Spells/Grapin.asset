@@ -16,5 +16,5 @@ MonoBehaviour:
   grapIndicatorPrefab: {fileID: 4665076585319047791, guid: 8ae984eaf3ebf5f4a8ce808e03dd6736, type: 3}
   maxRange: 20
   minRange: 1.5
-  speed: 10
-  maxGrapPullTime: 1
+  speed: 5
+  maxGrapPullTime: 3
