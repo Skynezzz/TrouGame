@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: PlayerMetrics
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMetrics
   viewSensitivity: 0.1
+  maxSlope: 0.3
   maxSpeed: 2
   runMaxSpeed: 5
   walkForce: 4

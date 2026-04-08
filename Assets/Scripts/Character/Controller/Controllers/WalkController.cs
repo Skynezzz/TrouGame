@@ -11,6 +11,7 @@ namespace TrouGame.Character.Controller.Controllers
     {
         [SerializeField] private Transform head;
         private float viewSensitivity => WalkControllerMetrics.Current.viewSensitivity;
+        private float maxSlope => WalkControllerMetrics.Current.maxSlope;
         private float maxSpeed => WalkControllerMetrics.Current.maxSpeed;
         private float runMaxSpeed => WalkControllerMetrics.Current.runMaxSpeed;
         private float walkForce => WalkControllerMetrics.Current.walkForce;
@@ -38,6 +39,7 @@ namespace TrouGame.Character.Controller.Controllers
 
         [SerializeField] private Vector2 currentDirection;
         [SerializeField] private bool _isGrounded = false;
+        [SerializeField] private bool isSliding = false;
         [SerializeField] private bool canJump = false;
         [SerializeField] private bool isRunning = false;
         [SerializeField] private bool isFirstPerson = true;
@@ -133,9 +135,9 @@ namespace TrouGame.Character.Controller.Controllers
             Vector3 initialVelocity = velocity;
 
             // Grounded Check //
-            if (Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo, Quaternion.identity, 1.01f))
+            if (Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo, Quaternion.identity, 1.51f) && 1 - hitInfo.normal.y <= maxSlope)
             {
-                if (initialVelocity.y <= 0f || (initialVelocity.y > 0f && hitInfo.distance < 1f))
+                if ((initialVelocity.y <= 0f && hitInfo.distance <= 1.1f) || (initialVelocity.y > 0f && hitInfo.distance < .9f) || (initialVelocity.y <= 0f && isGrounded && hitInfo.distance > 1f))
                 {
                     isGrounded = true;
                     character.position += Vector3.up * (1 - hitInfo.distance);
@@ -148,6 +150,14 @@ namespace TrouGame.Character.Controller.Controllers
                         initialVelocity = initialVelocity * (climbHeight * bigStepAccelerationMult);
                     }
                 }
+                else if (initialVelocity.y <= 0f && isGrounded)
+                {
+
+                }
+            }
+            else if (initialVelocity.y <= 0f && Physics.BoxCast(character.position, new Vector3(0.15f, 0.01f, 0.15f), Vector3.down, out RaycastHit hitInfo2, Quaternion.identity, 1.01f))
+            {
+
             }
             else
             {
@@ -194,13 +204,10 @@ namespace TrouGame.Character.Controller.Controllers
                 float speedKept = new Vector3(initialVelocity.x, 0, initialVelocity.z).magnitude * speedKeptPercentage;
 
                 // Walk Acceleration //
-                float currentMaxSpeed = maxSpeed;
-                float currentWalkForce = walkForce;
-                if (isRunning)
-                {
-                    currentMaxSpeed = runMaxSpeed;
-                    currentWalkForce = runForce;
-                }
+                float currentMaxSpeed = isRunning ? runMaxSpeed : maxSpeed;
+                float currentWalkForce = isRunning ? runForce: walkForce;
+                //currentWalkForce = isSliding ? 0f : currentWalkForce;
+
                 if (speedKept < currentMaxSpeed)
                 {
                     speedKept += (isGrounded ? currentWalkForce : currentWalkForce * airConstraint) * Time.fixedDeltaTime;

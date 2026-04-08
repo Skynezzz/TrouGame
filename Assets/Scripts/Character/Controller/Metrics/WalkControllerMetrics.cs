@@ -6,6 +6,7 @@ public class WalkControllerMetrics : GameSettings<WalkControllerMetrics>
 {
     [Header("Step")]
     [SerializeField, Range(0, 1)] public float viewSensitivity = 0.1f;
+    [SerializeField, Range(0, 1)] public float maxSlope = 0.3f;
     [SerializeField] public float maxSpeed = 20f;
     [SerializeField] public float runMaxSpeed = 20f;
     [SerializeField] public float walkForce = 20f;
